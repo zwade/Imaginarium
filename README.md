@@ -1,7 +1,7 @@
 #Imaginarium
 
 
-The purpose of the game is to teach students about complex numbers, specifically in the context of phase shifts of the real domain. You will have different orbs whose positions are defined by imaginary numbers. Then you have to perform operations on them to move them to pedestals. Once they are all there, the level is complete.
+The purpose of the game is to teach students about complex numbers, specifically in the context of phase shifts of the real domain. You will have different orbs whose positions are defined by complex numbers. Then you have to perform operations on them to move them to pedestals. Once they are all there, the level is complete.
 
 Operations to include 
  
