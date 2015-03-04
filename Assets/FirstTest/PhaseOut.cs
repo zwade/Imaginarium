@@ -84,7 +84,7 @@ public class PhaseOut : MonoBehaviour {
 			float i = mag*Mathf.Sin (a);
 			float x = 10*Mathf.Cos (Mathf.PI/2.0f+a);
 			float z = 10*Mathf.Sin (Mathf.PI/2.0f+a);
-			Debug.Log (r);
+			//Debug.Log (r);
 			player.transform.position = new Vector3(r,1,i);
 			camera.transform.position = new Vector3(x,1,z);
 			camera.transform.rotation = Quaternion.Euler (0,180-a*180/Mathf.PI,0);

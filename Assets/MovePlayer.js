@@ -2,17 +2,12 @@
 
 var speed = 5;
 
-function Start () {
+function Start() { }
 
-}
-
-function Update () {
-	var dir:int = 0;
-	if (Input.GetKey("left")) {
-		dir -= 1;
-	}
-	if (Input.GetKey("right")) {
-		dir += 1;
-	}
-	transform.localPosition = transform.localPosition + Vector3(dir*speed*Time.deltaTime,0,0);
+function Update() {
+	// Calculate direction of travel (left or right)
+	var dir : int = Input.GetKey("left") ? -1 : Input.GetKey("right") ? 1 : 0;
+	// Update position by adding <v dt, 0, 0>, where v = dir * |v|
+	// Character only moves on the x-axis
+	transform.localPosition += Vector3(dir * speed * Time.deltaTime, 0, 0);
 }
