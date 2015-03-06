@@ -22,6 +22,12 @@ public struct Complex {
 			return Mathf.Sqrt(real * real + imag * imag);
 		}
 	}
+
+	public Vector3 toVector3 {
+		get {
+			return new Vector3(real, 0, imag);
+		}
+	}
 	public static Complex c1 () {
 		return new Complex(1,0);
 	}
