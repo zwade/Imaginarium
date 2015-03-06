@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 
 public struct Complex {
+
 	float real, imag;
 	public Complex(float real, float imag) {
 		this.real = real;
@@ -21,6 +22,13 @@ public struct Complex {
 			return Mathf.Sqrt(real * real + imag * imag);
 		}
 	}
+	public static Complex c1 () {
+		return new Complex(1,0);
+	}
+	public static Complex cI () {
+		return new Complex(0,1);
+	}
+
 	public static Complex operator +(Complex x, Complex y) {
 		return new Complex(x.real + y.real, x.imag + y.imag);
 	}
@@ -39,6 +47,9 @@ public struct Complex {
 	public static Complex operator /(Complex x, float y) {
 		return x * (1 / y);
 	}
+	public static Complex operator ^ (Complex x, float y) {
+		return Complex.FromPolar(Mathf.Pow (x.Mag,y),x.Phase*y) ;
+	}
 	public static bool operator ==(Complex x, Complex y) {
 		return x.real == y.real && x.imag == y.imag; // floating point errors ayy lmao
 	}
@@ -56,6 +67,11 @@ public struct Complex {
 				.ToArray();
 	}
 	public override string ToString() {
-		return real + " + " + imag + "i";
+		if (Mathf.Abs(imag) <= 0.01) {
+			return (Mathf.Round (real*10)/10).ToString ();
+		} else if (Mathf.Abs(real) <= 0.01) {
+			return (Mathf.Round (imag*10)/10) + "i";
+		} 
+		return Mathf.Round(real*10)/10 + " + " + Mathf.Round(imag*100)/100 + "i";
 	}
 }

@@ -3,6 +3,7 @@
 var speed       : float = 0.5;
 var destination : float = 0;
 var angle       : float = 0;
+var quad        : int   = 0;
 
 function Start() { }
 
@@ -19,7 +20,14 @@ function Update() {
 	// Represents a phase shift of 90 degrees by rotating the world
 	if (Input.GetKeyUp("up")) {
 		destination += 90;
+		quad += 1;
+		quad = quad % 4;
 	} else if (Input.GetKeyDown("down")) {
 		destination -= 90;
+		quad -= 1;
+		if (quad < 0) {
+			quad += 4;
+		}
+		quad = quad % 4;
 	}
 }

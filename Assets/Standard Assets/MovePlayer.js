@@ -1,6 +1,7 @@
 ﻿#pragma strict
 
 var speed = 5;
+var distance:float = 0;
 
 function Start() { }
 
@@ -10,4 +11,5 @@ function Update() {
 	// Update position by adding <v dt, 0, 0>, where v = dir * |v|
 	// Character only moves on the x-axis
 	transform.localPosition += Vector3(dir * speed * Time.deltaTime, 0, 0);
+	distance = transform.localPosition.x;
 }
