@@ -62,6 +62,12 @@ public struct Complex {
 	public static bool operator !=(Complex x, Complex y) {
 		return !(x == y);
 	}
+	public override bool Equals(object obj) {
+		return this == (Complex) obj;
+	}
+	public override int GetHashCode() {
+		return (real.GetHashCode() + imag).GetHashCode(); // "nice and clean"
+	}
 	// Exponentiation is quite involved--do we really expect a player to do it by hand?
 	// public static Complex operator ^(Complex x, Complex y) { ... }
 	public Complex[] Roots(int n) {
