@@ -15,9 +15,14 @@ public class UpdateUI : MonoBehaviour {
 		mp = GetComponent<MovePlayer>();
 		rt = transform.parent.gameObject.GetComponent<Rotate>();
 	}
+
+	public Complex getLocation() {
+		return location;
+	}
 	
 	// Update is called once per frame 
 	void Update () {
-		textField.text = Complex.FromPolar(mp.distance/10,Mathf.PI/2*rt.quad).ToString();
+		location = Complex.FromPolar(mp.distance/10,-Mathf.PI/2*rt.quad);
+		textField.text = location.ToString();
 	}
 }

@@ -25,7 +25,7 @@ public struct Complex {
 
 	public Vector3 toVector3 {
 		get {
-			return new Vector3(real, 0, imag);
+			return new Vector3(real*10, 0, imag*10);
 		}
 	}
 	public static Complex c1 () {
@@ -56,6 +56,14 @@ public struct Complex {
 	public static Complex operator ^ (Complex x, float y) {
 		return Complex.FromPolar(Mathf.Pow (x.Mag,y),x.Phase*y) ;
 	}
+	//rotate
+	public static Complex operator & (Complex x, float t) {
+		return Complex.FromPolar (x.Mag,x.Phase+t);
+	}
+	//extend
+	public static Complex operator | (Complex x, float r) {
+		return Complex.FromPolar (x.Mag+r,x.Phase);
+	}
 	public static bool operator ==(Complex x, Complex y) {
 		return x.real == y.real && x.imag == y.imag; // floating point errors ayy lmao
 	}
@@ -68,6 +76,7 @@ public struct Complex {
 	public override int GetHashCode() {
 		return (real.GetHashCode() + imag).GetHashCode(); // "nice and clean"
 	}
+
 	// Exponentiation is quite involved--do we really expect a player to do it by hand?
 	// public static Complex operator ^(Complex x, Complex y) { ... }
 	public Complex[] Roots(int n) {

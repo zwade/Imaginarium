@@ -18,11 +18,11 @@ function Update() {
 		transform.Rotate(Vector3.up * dir * 90 / speed * Time.deltaTime);
 	}
 	// Represents a phase shift of 90 degrees by rotating the world
-	if (Input.GetKeyUp("up")) {
+	if (Input.GetKeyUp("down")) {
 		destination += 90;
 		quad += 1;
 		quad = quad % 4;
-	} else if (Input.GetKeyDown("down")) {
+	} else if (Input.GetKeyDown("up")) {
 		destination -= 90;
 		quad -= 1;
 		if (quad < 0) {
