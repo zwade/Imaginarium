@@ -26,23 +26,25 @@ public class OrbControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((position-destination).Mag < 0.1) {
-			position = destination;
-		}
 
 		if (position != destination) {
 			float angDist = destination.Phase - position.Phase;
 			float radDist = destination.Mag - position.Mag;
 			float scale = 0;
-			if (angDist == 0) {
-				scale = 1f;
-			} else if (radDist == 0) {
-				scale = .33f;
+			if (Mathf.Abs (angDist) <= 0.02) {
+				scale = 1f*Mathf.Sign(radDist);
+			} else if (Mathf.Abs (radDist) <= 0.02) {
+				scale = .33f*Mathf.Sign (angDist);
 			} else {
 				scale = radDist/angDist;
 			}
-			Debug.Log (position | (speed * scale * Time.deltaTime));
 			position = (position | (speed * scale * Time.deltaTime)) & (speed * Time.deltaTime);
+			Debug.Log (scale);
+			Debug.Log (4*Mathf.Sqrt (Mathf.Pow ((scale),2)+1)*Mathf.Abs (scale)*Time.deltaTime);
+			Debug.Log ("------------");
+			if ((position-destination).Mag < 2*Mathf.Sqrt (Mathf.Pow ((scale),2)+1)*Mathf.Abs(scale)*Time.deltaTime) {
+				position = destination;
+			}
 
 		} 
 		transform.position = position.toVector3 + 2.25f*Vector3.up;
@@ -65,6 +67,5 @@ public class OrbControl : MonoBehaviour {
 
 	public void addOne() {
 		destination = destination + Complex.c1();
-		Debug.Log (destination);
 	}
 }
