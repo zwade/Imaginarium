@@ -27,6 +27,18 @@ public class OrbControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Mathf.Abs(destination.Phase-position.Phase) < 0.1) {
+			position.Phase = destination.Phase;
+		} else {
+			position = position & (speed * Time.deltaTime);
+		}
+
+		if (Mathf.Abs(destination.Mag-position.Mag) < 0.05) {
+			position.Mag = destination.Mag;
+		} else {
+			position = position | (speed * .33f * Time.deltaTime * Mathf.Sign (destination.Mag - position.Mag));
+		}
+		/*
 		if (position != destination) {
 			float angDist = destination.Phase - position.Phase;
 			float radDist = destination.Mag - position.Mag;
@@ -47,16 +59,18 @@ public class OrbControl : MonoBehaviour {
 			}
 
 		} 
+*/
 		transform.position = position.toVector3 + 2.25f*Vector3.up;
 		transform.eulerAngles = new Vector3(0,position.Phase*-180/Mathf.PI,0);
-
 		if ((position-locManager.getLocation()).Mag < threshold) {
 			UI.SetActive(true);
 		} else {
 			UI.SetActive(false);
 		}
 	}
-
+	public Complex getLocation() {
+		return position;
+	}
 	public void timesNegativeOne() {
 		destination = destination * (Complex.c1() * -1f);
 	}
@@ -66,6 +80,6 @@ public class OrbControl : MonoBehaviour {
 	}
 
 	public void addOne() {
-		destination = destination + Complex.c1();
+		destination.Mag += 1;
 	}
 }

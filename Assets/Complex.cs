@@ -5,6 +5,7 @@ using System.Linq;
 public struct Complex {
 
 	float real, imag;
+
 	public Complex(float real, float imag) {
 		this.real = real;
 		this.imag = imag;
@@ -14,18 +15,37 @@ public struct Complex {
 	}
 	public float Phase {
 		get {
-			return Mathf.Atan2(imag, real);
+			float at = Mathf.Atan2(imag, real);
+			while (at < 0) {
+				at += 2*Mathf.PI;
+			}
+			return at;
+		}
+		set {
+			this.real = this.Mag*Mathf.Cos(value) ;
+			this.imag = this.Mag*Mathf.Sin (value);
 		}
 	}
 	public float Mag {
 		get {
 			return Mathf.Sqrt(real * real + imag * imag);
 		}
+		set {
+			float oldMag = this.Mag;
+			this.real = value/oldMag*this.real;
+			this.imag = value/oldMag*this.imag;
+		}
+
 	}
 
 	public Vector3 toVector3 {
 		get {
 			return new Vector3(real*10, 0, imag*10);
+		}
+	}
+	public Vector3 toVector2 {
+		get {
+			return new Vector2(real*10,imag*10);
 		}
 	}
 	public static Complex c1 () {

@@ -22,7 +22,7 @@ public class UpdateUI : MonoBehaviour {
 	
 	// Update is called once per frame 
 	void Update () {
-		location = Complex.FromPolar(mp.distance/10,-Mathf.PI/2*rt.quad);
+		location = Complex.FromPolar(mp.distance/10,-Mathf.PI*rt.angle/180f);
 		textField.text = location.ToString();
 	}
 }
