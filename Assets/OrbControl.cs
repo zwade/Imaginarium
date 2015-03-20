@@ -11,6 +11,11 @@ public class OrbControl : MonoBehaviour {
 
 	public float real;
 	public float complex;
+
+	public GameObject receptor;
+
+	public Color color;
+
 	private Complex position;
 
 	private Complex destination;
@@ -60,7 +65,7 @@ public class OrbControl : MonoBehaviour {
 
 		} 
 */
-		transform.position = position.toVector3 + 2.25f*Vector3.up;
+		transform.position = position.toVector3 + 1.5f*Vector3.up;
 		transform.eulerAngles = new Vector3(0,position.Phase*-180/Mathf.PI,0);
 		if ((position-locManager.getLocation()).Mag < threshold) {
 			UI.SetActive(true);
