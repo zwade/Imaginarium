@@ -38,7 +38,7 @@ function OnGUI () {
 		GUI.color.a = alpha;
 		GUI.contentColor.a = alpha;
 		GUI.backgroundColor.a = alpha;
-		GUI.Box(Rect(-5, -5, Screen.width + 10, Screen.height * 2), blackout);
+		GUI.Box(Rect(-Screen.width, -5, Screen.width * 3, Screen.height * 3), blackout);
 	}
 	GUI.skin = skin;
 	GUI.skin.button.fontSize = Mathf.Min(Screen.height, Screen.width) / 25;
