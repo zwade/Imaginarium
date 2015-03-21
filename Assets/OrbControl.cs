@@ -13,6 +13,8 @@ public class OrbControl : MonoBehaviour {
 	public float complex;
 
 	public GameObject receptor;
+	public GameObject camera;
+	public GameObject holder;
 
 	public Color color;
 
@@ -72,6 +74,13 @@ public class OrbControl : MonoBehaviour {
 		} else {
 			UI.SetActive(false);
 		}
+		Debug.Log (camera.transform.rotation.eulerAngles);
+		holder.transform.rotation = camera.transform.rotation;
+		//UI.transform.eulerAngles = new Vector3(0,90*state,0);
+		Debug.Log (UI.transform.rotation.eulerAngles);
+		Debug.Log ("-----");
+
+
 	}
 	public Complex getLocation() {
 		return position;
@@ -87,4 +96,16 @@ public class OrbControl : MonoBehaviour {
 	public void addOne() {
 		destination.Mag += 1;
 	}
+
+	public void subtractOne() {
+		destination.Mag -= 1;
+	}
+
+	public void square() {
+		destination = destination ^ 2f ;
+	}
+	public void squareRoot() {
+		destination = destination ^ 1/2f;
+	}
+
 }
