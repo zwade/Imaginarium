@@ -173,4 +173,13 @@ public class OrbControl : MonoBehaviour {
 		count--;
 	}
 
+	public void complexConjugate() {
+		destination = Complex.c1 ()*destination.Mag*destination.Mag;
+		if (count == 0) {
+			reset ();
+			return;
+		}
+		count--;
+	}
+
 }
