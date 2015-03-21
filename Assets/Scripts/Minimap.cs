@@ -23,7 +23,7 @@ public class Minimap : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject playerBlipInst = Instantiate(playerBlip);
-		playerBlipInst.transform.parent = this.transform;
+		playerBlipInst.transform.SetParent(this.transform);
 		playerBlipInst.transform.localPosition = new Vector3(0,0,0);
 		PBI = playerBlipInst.GetComponent<RectTransform>();
 		PBI.anchoredPosition = new Vector3(0,0,0);
@@ -37,11 +37,11 @@ public class Minimap : MonoBehaviour {
 
 		for (int i = 0; i < orbs.Length; i++) {
 			GameObject lInst = Instantiate(orbBlip);
-			lInst.transform.parent = this.transform;
+			lInst.transform.SetParent(this.transform);
 			lInst.transform.localPosition = new Vector3(0,0,0);
 
-			GameObject rInst = Instantiate (receptorBlip);
-			rInst.transform.parent = this.transform;
+			GameObject rInst = Instantiate(receptorBlip);
+			rInst.transform.SetParent(this.transform);
 			rInst.transform.localPosition = new Vector3(0,0,0);
 
 
