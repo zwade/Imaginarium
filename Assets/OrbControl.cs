@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OrbControl : MonoBehaviour {
 
 	public GameObject UI;
 	public GameObject Player;
+	public GameObject textData;
 
 	public float threshold = 2;
 	public float speed = 3.14f;
@@ -15,8 +17,14 @@ public class OrbControl : MonoBehaviour {
 	public GameObject receptor;
 	public GameObject camera;
 	public GameObject holder;
+	public GameObject particleSystem;
+
 
 	public Color color;
+
+	private ParticleSystem particles;
+	private Receptor recepScript;
+	private Text textScript;
 
 	private Complex position;
 
@@ -29,6 +37,9 @@ public class OrbControl : MonoBehaviour {
 		destination = position;
 		locManager = Player.GetComponent<UpdateUI>();
 		UI.SetActive(false);
+		textScript = textData.GetComponent<Text>();
+		recepScript = receptor.GetComponent<Receptor>();
+		particles = particleSystem.GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
@@ -74,11 +85,15 @@ public class OrbControl : MonoBehaviour {
 		} else {
 			UI.SetActive(false);
 		}
-		Debug.Log (camera.transform.rotation.eulerAngles);
 		holder.transform.rotation = camera.transform.rotation;
-		//UI.transform.eulerAngles = new Vector3(0,90*state,0);
-		Debug.Log (UI.transform.rotation.eulerAngles);
-		Debug.Log ("-----");
+
+		textScript.text = destination.ToString();
+
+		if (Mathf.Abs ((destination-recepScript.location).Mag) < 0.1) {
+			particles.enableEmission = true;
+		} else {
+			particles.enableEmission = false;
+		}
 
 
 	}
