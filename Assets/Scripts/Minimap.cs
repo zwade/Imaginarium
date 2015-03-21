@@ -20,8 +20,15 @@ public class Minimap : MonoBehaviour {
 	private RectTransform[] orbInst;
 	private OrbControl[] orbLocs;
 	private Receptor[] receptors;
+	private bool started = false;
 	// Use this for initialization
 	void Start () {
+
+	}
+
+	void Update() {
+		if (!started) {
+		started = true;
 		GameObject playerBlipInst = Instantiate(playerBlip);
 		playerBlipInst.transform.SetParent(this.transform);
 		playerBlipInst.transform.localPosition = new Vector3(0,0,0);
@@ -52,6 +59,8 @@ public class Minimap : MonoBehaviour {
 
 			receptors[i] = orbLocs[i].receptor.GetComponent<Receptor>();
 
+			Debug.Log (receptors[i].location.toVector2);
+
 			RectTransform rT = rInst.GetComponent<RectTransform>();
 			rT.localScale = new Vector3(1,1,1);
 			rT.anchoredPosition = 150/90f*receptors[i].location.toVector2;
@@ -59,11 +68,10 @@ public class Minimap : MonoBehaviour {
 			lInst.GetComponent<Image>().color = orbLocs[i].color;
 
 			rInst.GetComponent<Image>().color = orbLocs[i].color;
+
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
+		}
+
 		PBI.anchoredPosition = 150/90f*playerLoc.getLocation().toVector2;
 		for (int i = 0; i < orbs.Length; i++) {
 			orbInst[i].anchoredPosition = 150/90f*orbLocs[i].getLocation().toVector2;
