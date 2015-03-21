@@ -60,7 +60,7 @@ public class OrbControl : MonoBehaviour {
 		}
 
 		if (Mathf.Abs(destination.Mag-position.Mag) < 0.05) {
-			position.Mag = destination.Mag;
+			//position.Mag = destination.Mag;
 		} else {
 			position = position | (speed * .33f * Time.deltaTime * Mathf.Sign (destination.Mag - position.Mag));
 		}
@@ -77,9 +77,6 @@ public class OrbControl : MonoBehaviour {
 				scale = radDist/angDist;
 			}
 			position = (position | (speed * scale * Time.deltaTime)) & (speed * Time.deltaTime);
-			Debug.Log (scale);
-			Debug.Log (4*Mathf.Sqrt (Mathf.Pow ((scale),2)+1)*Mathf.Abs (scale)*Time.deltaTime);
-			Debug.Log ("------------");
 			if ((position-destination).Mag < 2*Mathf.Sqrt (Mathf.Pow ((scale),2)+1)*Mathf.Abs(scale)*Time.deltaTime) {
 				position = destination;
 			}
@@ -104,6 +101,10 @@ public class OrbControl : MonoBehaviour {
 		} else {
 			particles.enableEmission = false;
 			isSafe = false;
+		}
+
+		if (position.Mag < 0.1) {
+			reset();
 		}
 
 
@@ -143,12 +144,16 @@ public class OrbControl : MonoBehaviour {
 	}
 
 	public void subtractOne() {
+		bool lt = destination.Mag < 1;
 		destination.Mag -= 1;
 		if (count == 0) {
 			reset();
 			return;
 		}
 		count--;
+		if (destination.Mag < 1 && lt) {
+			Player.transform.parent.gameObject.GetComponent<Rotate>().Flip();
+		}
 	}
 
 	public void square() {

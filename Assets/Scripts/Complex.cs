@@ -16,6 +16,9 @@ public struct Complex {
 	public float Phase {
 		get {
 			float at = Mathf.Atan2(imag, real);
+			if (float.IsNaN (at)) {
+				return 0;
+			}
 			while (at < 0) {
 				at += 2*Mathf.PI;
 			}
@@ -28,7 +31,8 @@ public struct Complex {
 	}
 	public float Mag {
 		get {
-			return Mathf.Sqrt(real * real + imag * imag);
+			float o = Mathf.Sqrt(real * real + imag * imag);
+			return float.IsNaN (o) ? 0 : o;
 		}
 		set {
 			float oldMag = this.Mag;
@@ -78,7 +82,8 @@ public struct Complex {
 	}
 	//rotate
 	public static Complex operator & (Complex x, float t) {
-		return Complex.FromPolar (x.Mag,x.Phase+t);
+		Complex tmp = Complex.FromPolar (x.Mag,x.Phase+t);
+		return tmp;
 	}
 	//extend
 	public static Complex operator | (Complex x, float r) {

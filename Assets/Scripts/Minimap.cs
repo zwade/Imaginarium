@@ -54,7 +54,7 @@ public class Minimap : MonoBehaviour {
 
 			RectTransform rT = rInst.GetComponent<RectTransform>();
 			rT.localScale = new Vector3(1,1,1);
-			rT.anchoredPosition = 150/70*receptors[i].location.toVector2;
+			rT.anchoredPosition = 150/90f*receptors[i].location.toVector2;
 
 			lInst.GetComponent<Image>().color = orbLocs[i].color;
 
@@ -64,9 +64,9 @@ public class Minimap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		PBI.anchoredPosition = 150/70*playerLoc.getLocation().toVector2;
+		PBI.anchoredPosition = 150/90f*playerLoc.getLocation().toVector2;
 		for (int i = 0; i < orbs.Length; i++) {
-			orbInst[i].anchoredPosition = 150/70*orbLocs[i].getLocation().toVector2;
+			orbInst[i].anchoredPosition = 150/90f*orbLocs[i].getLocation().toVector2;
 		}
 	}
 }

@@ -31,3 +31,12 @@ function Update() {
 		quad = quad % 4;
 	}
 }
+
+public function Flip() {
+	destination -= 180;
+	quad -= 2;
+	if (quad < 0) {
+		quad += 4;
+	}
+	quad = quad % 4;
+}

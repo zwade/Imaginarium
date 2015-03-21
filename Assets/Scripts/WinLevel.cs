@@ -4,6 +4,7 @@ using System.Collections;
 public class WinLevel : MonoBehaviour {
 
 	public GameObject[] orbs;
+	public float delay = 2;
 
 	public float timeStart = -1;
 	// Use this for initialization
@@ -13,7 +14,7 @@ public class WinLevel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (timeStart > 0 && (Time.time-timeStart) > 1) {
+		if (timeStart > 0 && (Time.time-timeStart) > delay) {
 			Application.LoadLevel(Application.loadedLevel+1);
 		} 
 		if (timeStart < 0) {
